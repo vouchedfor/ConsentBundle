@@ -7,16 +7,16 @@ use Aws\DynamoDb\DynamoDbClient;
 class ConsentHandler
 {
     private $dynamoDbClient;
-    private $url;
+    private $tableName;
 
-    public function __construct(DynamoDbClient $dynamoDbClient, $url)
+    public function __construct(DynamoDbClient $dynamoDbClient, $tableName)
     {
         $this->dynamoDbClient = $dynamoDbClient;
-        $this->url = $url;
+        $this->tableName = $tableName;
     }
 
     public function decode($token)
     {
-        return $token . '-' . $this->url;
+        return $token . '-' . $this->tableName;
     }
 }

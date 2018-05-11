@@ -3,4 +3,4 @@ services:
       class: VouchedFor\ConsentBundle\Services\ConsentHandler
       arguments:
           $dynamoDbClient: '@aws.dynamodb'
-          $tableName: '%table_name%'
+          $tableName: '%vouchedfor_consent.table_name%'
