@@ -4,6 +4,7 @@ Provides a mechanism for managing email consent via AWS DynamoDb
 ## Installation
 
 As this is a private repository, add the following to `composer.json`:
+
     "repositories": [
         {
             "type": "vcs",
