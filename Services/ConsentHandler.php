@@ -15,16 +15,11 @@ class ConsentHandler
         $this->tableName = $tableName;
     }
 
-    public function updateConsent($email, $consent, $service){
+    public function update($email, array $consentService) {
         if (!$this->tableName) return;
 
         $date = new \DateTime('now');
-        $newData = [
-            'M' => [
-                'consent' => ['BOOL' => $consent],
-                'date' => ['S' => $date->format('Y-m-d H:i:s')],
-            ],
-        ];
+        $dateString = $date->format('Y-m-d H:i:s');
 
         $key = [
             'email' => ['S' => $email]
@@ -34,12 +29,21 @@ class ConsentHandler
             'TableName' => $this->tableName,
             'Key' => $key
         ]);
+
         if (!isset($getResponse['Item'])) {
             $data['email'] = ['S' => $email];
         } else {
             $data = $getResponse['Item'];
         }
-        $data[$service] = $newData;
+
+        foreach ($consentService as $service => $consent) {
+            $data[$service] =  [
+                'M' => [
+                    'consent' => ['BOOL' => $consent],
+                    'date' => ['S' => $dateString]
+                ],
+            ];
+        }
 
         $this->dynamoDbClient->putItem([
             'TableName' => 'consent',

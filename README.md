@@ -37,8 +37,14 @@ Add the name of the consent table in DynamoDB to `config.yml`. For example:
 
 ## Example Usage
         $consentHandler = $this->get('vouchedfor_consent');
+        
+        $services = [
+            'vouchedfor_marketing': true,
+            'hatch_marketing': true,
+            'vouchedfor_emails: false
+        ];
 
-        $consentHandler->updateConsent('myemail@test.com', false, 'vouchedfor');
+        $consentHandler->update('myemail@test.com', $services);
 
 ## License
 
