@@ -46,7 +46,7 @@ class ConsentHandler
         }
 
         $this->dynamoDbClient->putItem([
-            'TableName' => 'consent',
+            'TableName' => $this->tableName,
             'Item' => $data
         ]);
     }
