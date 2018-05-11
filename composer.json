@@ -1,0 +1,23 @@
+{
+    "name": "vouchedfor/consent-bundle",
+    "description": "Provides support for email opt-in/out consent management via DynamoDb",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/vouchedfor/ConsentBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan Stidwill"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "~3.0|~4.0",
+        "aws/aws-sdk-php-symfony": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5"
+    },
+    "autoload": {
+        "psr-4": { "VouchedFor\\ConsentBundle\\": "" }
+    }
+}
+
