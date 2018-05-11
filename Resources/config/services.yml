@@ -1,6 +1,7 @@
 services:
     vouchedfor_consent:
       class: VouchedFor\ConsentBundle\Services\ConsentHandler
+      public: true
       arguments:
           $dynamoDbClient: '@aws.dynamodb'
           $tableName: '%vouchedfor_consent.table_name%'
