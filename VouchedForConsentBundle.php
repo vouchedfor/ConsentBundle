@@ -1,6 +1,6 @@
 <?php
 
-namespace VouchedFor\TokenBundle;
+namespace VouchedFor\ConsentBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
