@@ -34,7 +34,12 @@ Add the name of the consent table in DynamoDB to `config.yml`. For example:
     vouched_for_consent:
         table_name: consent
 
+## Example Usage
+        $consentHandler = $this->get('vouchedfor_consent');
+
+        $consentHandler->updateConsent('myemail@test.com', false, 'vouchedfor');
+
 ## License
 
-The Token Bundle is free to use and is licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php)
+The Consent Bundle is free to use and is licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php)
 
