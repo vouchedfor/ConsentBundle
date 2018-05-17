@@ -21,6 +21,10 @@ class ConsentHandlerTest extends TestCase
         parent::setUp();
     }
 
+    public function testGet() {
+        $this->assertNull($this->consentHandler->get('FlEmMB7ZTgpxfDJYKYQEDw=='));
+    }
+
     public function testUpdate() {
         $services = [
             'Elephant' => true,
@@ -31,11 +35,11 @@ class ConsentHandlerTest extends TestCase
     }
 
     public function testEncrypt() {
-        $this->assertEquals('xnS/I49UYze10i3qqgDGDlkld2nu/OAq5KAGgoz4P7s=', $this->consentHandler->encrypt('this is a test string'));
+        $this->assertEquals('FlEmMB7ZTgpxfDJYKYQEDw==', $this->consentHandler->encrypt('info@test.com'));
     }
 
     public function testDecrypt() {
-        $this->assertEquals('this is a test string', $this->consentHandler->decrypt('xnS/I49UYze10i3qqgDGDlkld2nu/OAq5KAGgoz4P7s='));
+        $this->assertEquals('info@test.com', $this->consentHandler->decrypt('FlEmMB7ZTgpxfDJYKYQEDw=='));
     }
 
 
@@ -46,7 +50,7 @@ class ConsentHandlerTest extends TestCase
 
     public function testGetKey()
     {
-        $this->assertEquals(['email' => ['S' => 'test@test.com']], $this->invokeMethod($this->consentHandler, 'getKey', ['test@test.com']));
+        $this->assertEquals(['email' => ['S' => 'info@test.com']], $this->invokeMethod($this->consentHandler, 'getKey', ['FlEmMB7ZTgpxfDJYKYQEDw==']));
     }
 
     public function testGetKeyConsentString()

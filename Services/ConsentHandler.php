@@ -28,20 +28,18 @@ class ConsentHandler
         return openssl_decrypt($string, self::ENCRYPTION_METHOD, $this->password, 0);
     }
 
+    public function get($encryptedEmail)
+    {
+        return $this->getData($this->getKey($encryptedEmail));
+    }
+
     public function update($encryptedEmail, $date, array $consentService)
     {
         if (!$this->tableName) return;
 
-        $email = $this->decrypt($encryptedEmail);
+        $key = $this->getKey($encryptedEmail);
 
-        $key = $this->getKey($email);
-
-        $getResponse = $this->dynamoDbClient->getItem(
-            [
-                'TableName' => $this->tableName,
-                'Key' => $key,
-            ]
-        );
+        $getResponse = $this->getData($key);
 
         $data = isset($getResponse['Item']) ? $getResponse['Item'] : $key;
 
@@ -64,10 +62,10 @@ class ConsentHandler
         return ['S' => $dateObject->format('Y-m-d H:i:s')];
     }
 
-    private function getKey($email)
+    private function getKey($encryptedEmail)
     {
         return [
-            'email' => ['S' => $email],
+            'email' => ['S' => $this->decrypt($encryptedEmail)],
         ];
     }
 
@@ -84,5 +82,15 @@ class ConsentHandler
                 'date' => $this->getDateStringArray($date),
             ],
         ];
+    }
+
+    private function getData($key)
+    {
+        return $this->dynamoDbClient->getItem(
+            [
+                'TableName' => $this->tableName,
+                'Key' => $key,
+            ]
+        );
     }
 }
