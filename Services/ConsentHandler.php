@@ -28,7 +28,7 @@ class ConsentHandler
         return openssl_decrypt($string, self::ENCRYPTION_METHOD, $this->password, 0);
     }
 
-    public function update($encryptedEmail, array $consentService)
+    public function update($encryptedEmail, $date, array $consentService)
     {
         if (!$this->tableName) return;
 
@@ -46,7 +46,7 @@ class ConsentHandler
         $data = isset($getResponse['Item']) ? $getResponse['Item'] : $key;
 
         foreach ($consentService as $service => $consentChoice) {
-            $data[$service] = $this->getConsentData($consentChoice);
+            $data[$service] = $this->getConsentData($consentChoice, $date);
         }
 
         $this->dynamoDbClient->putItem(

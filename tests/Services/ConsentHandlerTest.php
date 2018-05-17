@@ -27,7 +27,7 @@ class ConsentHandlerTest extends TestCase
             'Kangaroo' => false,
         ];
 
-        $this->assertNull($this->consentHandler->update('test@test.com', $services));
+        $this->assertNull($this->consentHandler->update('test@test.com', '2016-01-01 12:13:31', $services));
     }
 
     public function testEncrypt() {
