@@ -23,6 +23,7 @@ class VouchedForConsentExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('vouchedfor_consent.table_name', $config['table_name']);
+        $container->setParameter('vouchedfor_consent.password', $config['password']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
