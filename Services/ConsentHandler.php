@@ -57,11 +57,6 @@ class ConsentHandler
         );
     }
 
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
     private function getDateStringArray($date = 'now')
     {
         $dateObject = new \DateTime($date);
