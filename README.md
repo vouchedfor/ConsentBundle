@@ -34,9 +34,12 @@ Add the name of the consent table in DynamoDB to `config.yml`. For example:
     // app/config/config.yml
     vouched_for_consent:
         table_name: consent
+        password: secretpasswordforemailencryption
 
 ## Example Usage
         $consentHandler = $this->get('vouchedfor_consent');
+
+        $encryptedEmail = $consentHandler->encrypt('info@test.com');
         
         $services = [
             'vouchedfor_marketing': true,
@@ -44,7 +47,7 @@ Add the name of the consent table in DynamoDB to `config.yml`. For example:
             'vouchedfor_emails: false
         ];
 
-        $consentHandler->update('myemail@test.com', $services);
+        $consentHandler->update($encryptedEmail, $services);
 
 ## License
 

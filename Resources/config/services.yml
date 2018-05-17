@@ -5,3 +5,4 @@ services:
       arguments:
           $dynamoDbClient: '@aws.dynamodb'
           $tableName: '%vouchedfor_consent.table_name%'
+          $password: '%vouchedfor_consent.password%'
