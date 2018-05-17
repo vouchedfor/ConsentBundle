@@ -22,7 +22,7 @@ class ConsentHandlerTest extends TestCase
     }
 
     public function testGet() {
-        $this->assertNull($this->consentHandler->get('FlEmMB7ZTgpxfDJYKYQEDw=='));
+        $this->assertFalse($this->consentHandler->get('FlEmMB7ZTgpxfDJYKYQEDw=='));
     }
 
     public function testUpdate() {

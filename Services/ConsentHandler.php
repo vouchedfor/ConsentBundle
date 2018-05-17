@@ -30,7 +30,21 @@ class ConsentHandler
 
     public function get($encryptedEmail)
     {
-        return $this->getData($this->getKey($encryptedEmail));
+        $data = $this->getData($this->getKey($encryptedEmail));
+
+        if (!$data['Item']) return false;
+
+        $response = [];
+
+        foreach ($data['Item'] as $key => $value) {
+            if ($key == 'email') {
+                $response[$key] = $value['S'];
+            } else {
+                $response[$key] = ['date' => $value['M']['date']['S'], 'consent' => $value['M']['consent']['BOOL']];
+            }
+        }
+
+        return $response;
     }
 
     public function update($encryptedEmail, $date, array $consentService)
