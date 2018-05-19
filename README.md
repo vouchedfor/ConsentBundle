@@ -42,12 +42,12 @@ Add the name of the consent table in DynamoDB to `config.yml`. For example:
         $encryptedEmail = $consentHandler->encrypt('info@test.com');
         
         $services = [
-            'vouchedfor_marketing': true,
-            'hatch_marketing': true,
-            'vouchedfor_emails: false
+            'marketing_emails': true,
+            'service_emails': true,
+            'third_party_emails: false
         ];
 
-        $consentHandler->update($encryptedEmail, $services);
+        $consentHandler->update($encryptedEmail, '2018-01-03 12:30:12', $services);
 
 ## License
 
