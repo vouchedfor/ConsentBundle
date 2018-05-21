@@ -3,15 +3,6 @@ Provides a mechanism for managing email consent via AWS DynamoDb
 
 ## Installation
 
-As this is a private repository, add the following to `composer.json`:
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "https://github.com/vouchedfor/ConsentBundle.git"
-        }
-    ],
-
 Install it with composer:
 
     composer require vouchedfor/consent-bundle:dev-master
