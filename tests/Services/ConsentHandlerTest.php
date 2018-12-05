@@ -57,7 +57,7 @@ class ConsentHandlerTest extends TestCase
 
     public function testGetId()
     {
-        $this->assertEquals(['id' => ['N' => 12345]], $this->invokeMethod($this->consentHandler, 'getId', ['12345']));
+        $this->assertEquals(['N' => 12345], $this->invokeMethod($this->consentHandler, 'getId', ['12345']));
     }
 
     public function testGetKeyConsentString()

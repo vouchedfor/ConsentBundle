@@ -91,9 +91,7 @@ class ConsentHandler
 
     private function getId($id)
     {
-        return [
-            'id' => ['N' => $id],
-        ];
+        return ['N' => $id];
     }
 
     private function getConsentString(bool $consentChoice)
