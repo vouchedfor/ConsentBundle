@@ -49,7 +49,7 @@ class ConsentHandler
         return $response;
     }
 
-    public function update($encryptedEmail, $date, array $consentService)
+    public function update($encryptedEmail, $date, array $consentService, $id = null)
     {
         if (!$this->tableName) return;
 
@@ -61,6 +61,10 @@ class ConsentHandler
 
         foreach ($consentService as $service => $consentChoice) {
             $data[$service] = $this->getConsentData($consentChoice, $date);
+        }
+
+        if ($id) {
+            $data['id'] = $this->getId($id);
         }
 
         $this->dynamoDbClient->putItem(
@@ -82,6 +86,13 @@ class ConsentHandler
     {
         return [
             'email' => ['S' => $this->decrypt($encryptedEmail)],
+        ];
+    }
+
+    private function getId($id)
+    {
+        return [
+            'id' => ['N' => $id],
         ];
     }
 

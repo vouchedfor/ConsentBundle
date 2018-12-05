@@ -32,6 +32,7 @@ class ConsentHandlerTest extends TestCase
         ];
 
         $this->assertNull($this->consentHandler->update('test@test.com', '2016-01-01 12:13:31', $services));
+        $this->assertNull($this->consentHandler->update('test@test.com', '2016-01-01 12:13:31', $services, 12345));
     }
 
     public function testEncrypt() {
@@ -53,6 +54,12 @@ class ConsentHandlerTest extends TestCase
         $this->assertEquals(['email' => ['S' => 'info@test.com']], $this->invokeMethod($this->consentHandler, 'getKey', ['FlEmMB7ZTgpxfDJYKYQEDw==']));
     }
 
+
+    public function testGetId()
+    {
+        $this->assertEquals(['id' => ['N' => 12345]], $this->invokeMethod($this->consentHandler, 'getId', ['12345']));
+    }
+
     public function testGetKeyConsentString()
     {
         $this->assertEquals(['BOOL' => true], $this->invokeMethod($this->consentHandler, 'getConsentString', [true]));
@@ -67,6 +74,13 @@ class ConsentHandlerTest extends TestCase
                 'date' => ['S' => '2017-05-01 12:13:33'],
             ],
         ], $this->invokeMethod($this->consentHandler, 'getConsentData', [true, '2017-05-01 12:13:33']));
+
+        $this->assertEquals([
+            'M' => [
+                'consent' => ['BOOL' => false],
+                'date' => ['S' => '2017-05-01 12:13:33'],
+            ],
+        ], $this->invokeMethod($this->consentHandler, 'getConsentData', [false, '2017-05-01 12:13:33']));
 
         $this->assertEquals([
             'M' => [
