@@ -17,10 +17,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('vouched_for_consent');
+        $treeBuilder = new TreeBuilder('vouched_for_consent');
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
             ->scalarNode('table_name')->end()
             ->scalarNode('password')->end();
