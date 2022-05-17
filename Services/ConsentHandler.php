@@ -30,7 +30,9 @@ class ConsentHandler
 
     public function get($encryptedEmail)
     {
-        if (!$this->tableName) return false;
+        if (!isset($this->tableName)) {
+            return false;
+        }
 
         $data = $this->getData($this->getKey($encryptedEmail));
 
@@ -42,8 +44,11 @@ class ConsentHandler
             if ($key == 'email') {
                 $response[$key] = $value['S'];
             } else {
-                if(isset($value['M'])) {
-                    $response[$key] = ['date' => $value['M']['date']['S'], 'consent' => $value['M']['consent']['BOOL']];
+                if (isset($value['M'])) {
+                    $response[$key] = [
+                        'date' => $value['M']['date']['S'],
+                        'consent' => $value['M']['consent']['BOOL']
+                    ];
                 }
             }
         }
