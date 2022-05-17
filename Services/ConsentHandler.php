@@ -30,9 +30,7 @@ class ConsentHandler
 
     public function get($encryptedEmail)
     {
-        if (!isset($this->tableName)) {
-            return false;
-        }
+        if (!$this->tableName) return false;
 
         $data = $this->getData($this->getKey($encryptedEmail));
 
