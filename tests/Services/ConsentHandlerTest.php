@@ -10,7 +10,7 @@ class ConsentHandlerTest extends TestCase
     /* @var \VouchedFor\ConsentBundle\Services\ConsentHandler $consentHandler */
     private $consentHandler;
 
-    public function setUp()
+    public function setUp(): void
     {
         $dynamoDbClient = $this->getMockBuilder(DynamoDbClient::class)
             ->disableOriginalConstructor()
@@ -21,11 +21,13 @@ class ConsentHandlerTest extends TestCase
         parent::setUp();
     }
 
-    public function testGet() {
+    public function testGet()
+    {
         $this->assertFalse($this->consentHandler->get('FlEmMB7ZTgpxfDJYKYQEDw=='));
     }
 
-    public function testUpdate() {
+    public function testUpdate()
+    {
         $services = [
             'Elephant' => true,
             'Kangaroo' => false,
@@ -35,11 +37,13 @@ class ConsentHandlerTest extends TestCase
         $this->assertNull($this->consentHandler->update('test@test.com', '2016-01-01 12:13:31', $services, 12345));
     }
 
-    public function testEncrypt() {
+    public function testEncrypt()
+    {
         $this->assertEquals('FlEmMB7ZTgpxfDJYKYQEDw==', $this->consentHandler->encrypt('info@test.com'));
     }
 
-    public function testDecrypt() {
+    public function testDecrypt()
+    {
         $this->assertEquals('info@test.com', $this->consentHandler->decrypt('FlEmMB7ZTgpxfDJYKYQEDw=='));
     }
 
