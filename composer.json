@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "~5.3.15|~6.0.0",
+        "symfony/framework-bundle": "~5.3.15|~5.4|~6.0.0",
         "aws/aws-sdk-php-symfony": "~1.0|~2.0"
     },
     "require-dev": {
