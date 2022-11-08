@@ -32,7 +32,10 @@ class ConsentHandler
     {
         if (!$this->tableName) return false;
 
-        $data = $this->getData($this->getKey($encryptedEmail));
+        $key = $this->getKey($encryptedEmail);
+        if (!$key['email']['S']) return false;
+
+        $data = $this->getData($key);
 
         if (!isset($data['Item'])) return false;
 
@@ -59,6 +62,7 @@ class ConsentHandler
         if (!$this->tableName) return;
 
         $key = $this->getKey($encryptedEmail);
+        if (!$key['email']['S']) return;
 
         $getResponse = $this->getData($key);
 
